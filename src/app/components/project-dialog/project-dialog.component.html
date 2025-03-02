@@ -1,0 +1,94 @@
+<p-dialog
+  header="Edit Profile"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '50rem' }"
+>
+  <form
+    [formGroup]="projectForm"
+    class="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full"
+  >
+    <p-floatlabel variant="in">
+      <input id="name" type="text" pInputText fluid formControlName="projeto" />
+      <label for="name">Projeto</label>
+    </p-floatlabel>
+    <p-floatlabel variant="in">
+      <input
+        id="sponsor"
+        type="text"
+        pInputText
+        fluid
+        formControlName="id_financiador"
+      />
+      <label for="sponsor">Financiador</label>
+    </p-floatlabel>
+    <p-floatlabel variant="in">
+      <input
+        id="tech_area"
+        type="text"
+        pInputText
+        fluid
+        formControlName="id_area_tecnologica"
+      />
+      <label for="tech_area">Área tecnologica</label>
+    </p-floatlabel>
+    <p-floatlabel variant="in">
+      <input
+        id="coordenador"
+        type="text"
+        pInputText
+        fluid
+        formControlName="id_coordenador"
+      />
+      <label for="coordenador">Coordenador</label>
+    </p-floatlabel>
+    <div
+      class="p-4 flex flex-col gap-2 bg-[var(--p-inputtext-background)] border border-[var(--p-inputtext-border-color)] rounded-lg"
+    >
+      <label class="text-[var(--p-floatlabel-color)] mb-2" for="period"
+        >Vigência</label
+      >
+      <input
+        id="start_date"
+        type="date"
+        pInputText
+        fluid
+        formControlName="inicio_vigencia"
+      />
+      <input
+        id="end_date"
+        type="date"
+        pInputText
+        fluid
+        formControlName="fim_vigencia"
+      />
+    </div>
+    <div
+      class="p-4 flex flex-col gap-2 bg-[var(--p-inputtext-background)] border border-[var(--p-inputtext-border-color)] rounded-lg"
+    >
+      <label class="text-[var(--p-floatlabel-color)] mb-2" for="period">
+        Ativo
+      </label>
+      <div class="flex items-center">
+        <p-radiobutton
+          inputId="ativoSim"
+          [value]="true"
+          formControlName="ativo"
+        ></p-radiobutton>
+        <label for="ativoSim" class="ml-2">Sim</label>
+      </div>
+      <div class="flex items-center">
+        <p-radiobutton
+          inputId="ativoNao"
+          [value]="false"
+          formControlName="ativo"
+        ></p-radiobutton>
+        <label for="ativoNao" class="ml-2">Não</label>
+      </div>
+    </div>
+  </form>
+  <ng-template #footer>
+    <p-button label="Cancelar" (click)="onClose()" />
+    <p-button label="Salvar" (click)="onSubmit()" />
+  </ng-template>
+</p-dialog>
