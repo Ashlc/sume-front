@@ -1,0 +1,45 @@
+<div
+  class="border border-[var(--p-inputtext-border-color)] rounded-xl overflow-clip pb-4"
+>
+  <p-table [value]="projects">
+    <p-confirmdialog />
+    <ng-template #header>
+      <tr>
+        <th>Projeto</th>
+        <th>Ativo</th>
+        <th>Vigência</th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-p>
+      <tr>
+        <td>
+          {{ p.projeto }}
+        </td>
+        <td>
+          <project-status [status]="p.ativo" />
+        </td>
+        <td>
+          {{ p.inicio_vigencia | date: "dd/MM/yyyy" }} -
+          {{ p.fim_vigencia | date: "dd/MM/yyyy" }}
+        </td>
+        <td>
+          <div class="flex gap-2">
+            <icon-button label="Ver">
+              <ng-icon name="tablerEye" id="icon" />
+            </icon-button>
+            <icon-button label="Editar">
+              <ng-icon name="tablerEdit" id="icon" />
+            </icon-button>
+            <icon-button
+              [label]="p.ativo ? 'Inativar' : 'Ativar'"
+              (click)="confirmToggle(p)"
+            >
+              <ng-icon [name]="p.ativo ? 'tablerX' : 'tablerCheck'" id="icon" />
+            </icon-button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

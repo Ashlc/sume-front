@@ -1,0 +1,13 @@
+<button
+  [pTooltip]="label"
+  tooltipPosition="bottom"
+  [class]="
+    'cursor-pointer h-8 w-8 bg-slate-500 text-white flex items-center justify-center transition-all focus:outline-3 focus:outline-offset-1 active:bg-slate-600 active:outline-slate-400 focus:outline-slate-400/50 hover:bg-slate-400' +
+    (disabled ? ' cursor-not-allowed' : '') +
+    (circle ? ' rounded-full' : ' rounded-lg')
+  "
+  [attr.aria-label]="label"
+  [disabled]="disabled"
+>
+  <ng-content></ng-content>
+</button>
