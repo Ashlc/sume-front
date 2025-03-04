@@ -1,7 +1,5 @@
-<div
-  class="border border-[var(--p-inputtext-border-color)] rounded-xl overflow-clip pb-4"
->
-  <p-table [value]="projects">
+<div>
+  <p-table [value]="projectService.filteredProjects">
     <p-confirmdialog />
     <ng-template #header>
       <tr>
@@ -25,10 +23,10 @@
         </td>
         <td>
           <div class="flex gap-2">
-            <icon-button label="Ver">
+            <icon-button label="Ver" (click)="view(p)">
               <ng-icon name="tablerEye" id="icon" />
             </icon-button>
-            <icon-button label="Editar">
+            <icon-button label="Editar" (click)="edit(p)">
               <ng-icon name="tablerEdit" id="icon" />
             </icon-button>
             <icon-button

@@ -7,11 +7,13 @@ import {
   tablerEye,
   tablerX,
 } from '@ng-icons/tabler-icons';
+import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService } from 'primeng/api';
 import { BadgeModule } from 'primeng/badge';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
-import { ApiService } from '../../services/api.service';
+import { Project } from '../../models/project';
+import { ProjectService } from '../../services/project.service';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { ProjectStatusComponent } from '../project-status/project-status.component';
 @Component({
@@ -33,36 +35,39 @@ import { ProjectStatusComponent } from '../project-status/project-status.compone
   ],
 })
 export class ProjectTableComponent implements OnInit {
-  public projects: any;
-
   constructor(
-    private api: ApiService,
+    public projectService: ProjectService,
     private confirmationService: ConfirmationService,
+    private toastr: ToastrService,
   ) {}
 
-  confirmToggle(project: any) {
+  confirmToggle(project: Project) {
     this.confirmationService.confirm({
       header: project.ativo ? 'Inativar projeto?' : 'Ativar projeto?',
       message: `Deseja realmente ${project.ativo ? 'inativar' : 'ativar'} <b>${project.projeto}?</b>`,
       acceptLabel: project.ativo ? 'Inativar' : 'Ativar',
       accept: () => {
-        console.log('acepted');
+        this.projectService.toggleProjectStatus(project);
       },
       rejectLabel: 'Cancelar',
+      rejectButtonStyleClass: 'p-button-text',
       reject: () => {
-        console.log('rejected');
+        this.toastr.info('Operação cancelada');
       },
     });
   }
 
-  toggleStatus(current: boolean) {
-    console.log(`${current} => ${!current}`);
-    return;
+  view(p: Project) {
+    this.projectService.selectProject(p.id_projeto);
+    this.projectService.setDialogMode('view');
+  }
+
+  edit(p: Project) {
+    this.projectService.selectProject(p.id_projeto);
+    this.projectService.setDialogMode('edit');
   }
 
   ngOnInit(): void {
-    this.api.get('projetos/listar').subscribe((data) => {
-      this.projects = data;
-    });
+    this.projectService.getProjects();
   }
 }
