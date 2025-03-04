@@ -20,7 +20,7 @@ import { ProjectTableComponent } from './components/project-table/project-table.
     ProjectDialogComponent,
   ],
   templateUrl: './app.component.html',
-  viewProviders: [provideIcons({ tablerPlus })],
+  viewProviders: [provideIcons({ tablerPlus, tablerTable })],
 })
 export class AppComponent {
   title = 'Projetos';
