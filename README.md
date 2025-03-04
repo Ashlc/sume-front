@@ -1,59 +1,55 @@
-# SumeFront
+# Prova front-end 
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+## Descrição
 
-## Development server
+Este projeto foi desenvolvido para o processo seletivo do Laboratório de Computação Científica e Visualização (LCCV) da Universidade Federal de Alagoas (UFAL), referente à vaga de desenvolvedor front-end, conforme o edital Nº 005/2025.
 
-To start a local development server, run:
+A aplicação implementa uma interface web interativa seguindo o protótipo fornecido e integra-se com a API disponibilizada para gerenciar projetos via operações CRUD.
 
-```bash
-ng serve
-```
+## Tecnologias utilizadas
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- HTML, CSS, JavaScript – Base da aplicação web
+- AngularJS – Framework principal utilizado
+- Tailwind CSS – Estilização eficiente e responsiva
+- PrimeNG – Biblioteca de componentes UI para Angular
+- NGX Toastr – Notificações e alertas dinâmicos
+- NG Icons – Ícones para melhor experiência visual
 
-## Code scaffolding
+## Requisitos da prova
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- [x] Interface baseada no protótipo de baixa fidelidade
+- [x] Integração com a API fornecida via:
+  - [x] Services para comunicação assíncrona
+  - [x] Models para tipagem e organização dos dados
+- [x] CRUD completo dos projetos
+- [x] Pesquisa de projetos
+- [x] Exibição de alertas informativos e de erro
+- [x] Uso de biblioteca de estilos
 
-```bash
-ng generate component component-name
-```
+## Desafios e Soluções
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### AngularJS
 
-```bash
-ng generate --help
-```
+Nunca havia utilizado AngularJS antes, então foi necessário um estudo acelerado da documentação e padrões da framework. Aprendi a utilizar componentes, diretivas, serviços, rotas, injeção de dependências, etc. Uma vantagem foi a familiaridade com outras frameworks front-end como React, Svelte e Blade.
 
-## Building
+### Interpretação do Protótipo
 
-To build the project run:
+O protótipo de baixa fidelidade apresentava ambiguidade quanto à página inicial. Optei por definir uma estrutura baseada na melhor experiência do usuário.
 
-```bash
-ng build
-```
+### Pesquisa de Projetos
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+A API não fornecia um endpoint específico para busca contendo todos os campos listados pelo protótipo. A solução foi implementar um filtro client-side eficiente para minimizar requisições desnecessárias. Além disso, todos os filtros estão na mesma página que a tabela de projetos, facilitando a interação do usuário.
 
-## Running unit tests
+### Problemas no Modelo ER
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Foi identificado um erro de digitação no modelo entidade-relacionamento fornecido, exigindo ajustes na modelagem dos dados. Percebi o erro ao estudar a API e comparar com o modelo.
 
-```bash
-ng test
-```
+### Erro de CORS
 
-## Running end-to-end tests
+A API retornava erro de CORS ao processar requisições sem trailing slash no endpoint. A solução envolveu configurar manualmente as URLs para que sempre inclua trailing slash. Não sabia que isso poderia causar problemas, então fui atrás de entender e descobri que está relacionado ao redirecionamento no Django.
 
-For end-to-end (e2e) testing, run:
+## Possíveis melhorias
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [ ] Implementar testes unitários e de integração
+- [ ] Adicionar paginação na tabela de projetos
+- [ ] Adicionar um theme switcher
