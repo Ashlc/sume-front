@@ -5,12 +5,22 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import {
+  tablerDeviceFloppy,
+  tablerEdit,
+  tablerX,
+} from '@ng-icons/tabler-icons';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { FloatLabel } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { RadioButton } from 'primeng/radiobutton';
-import { ApiService } from '../../services/api.service';
+import { SelectModule } from 'primeng/select';
+import { Subscription } from 'rxjs';
+import { ProjectService } from '../../services/project.service';
+
 @Component({
   selector: 'project-dialog',
   imports: [
@@ -21,61 +31,76 @@ import { ApiService } from '../../services/api.service';
     RadioButton,
     ReactiveFormsModule,
     ButtonModule,
+    SelectModule,
+    NgIcon,
   ],
   templateUrl: './project-dialog.component.html',
+  viewProviders: [provideIcons({ tablerDeviceFloppy, tablerEdit, tablerX })],
 })
 export class ProjectDialogComponent {
-  projectForm: FormGroup<{
-    projeto: FormControl<string>;
-    id_financiador: FormControl<number>;
-    id_area_tecnologica: FormControl<number>;
-    id_coordenador: FormControl<number>;
-    ativo: FormControl<boolean>;
-    inicio_vigencia: FormControl<string>;
-    fim_vigencia: FormControl<string>;
-  }>;
+  projectForm: FormGroup = new FormGroup({});
 
-  @Input() visible: boolean = false;
   @Input() title: string = '';
-  @Input() mode: 'create' | 'view' | 'edit' = 'create';
-  @Input() project: any = {};
-  @Input() onClose: Function = () => {};
-  @Input() submitCallback: Function = (message: string) => {};
 
-  constructor(private api: ApiService) {
-    this.projectForm = new FormGroup({
-      projeto: new FormControl(this.project.project || null),
-      id_financiador: new FormControl(this.project.id_financiador || null),
-      id_area_tecnologica: new FormControl(
-        this.project.id_area_tecnologica || null,
-      ),
-      id_coordenador: new FormControl(this.project.id_coordenador || null),
-      ativo: new FormControl(this.project.ativo || null),
-      inicio_vigencia: new FormControl(this.project.inicio_vigencia || null),
-      fim_vigencia: new FormControl(this.project.fim_vigencia || null),
+  private sub?: Subscription;
+
+  constructor(public projectService: ProjectService) {}
+
+  ngOnInit() {
+    this.initForm();
+    this.projectService.getFormFields();
+    this.sub = this.projectService.selectedProject.subscribe((p) => {
+      this.projectForm.patchValue(p);
     });
   }
 
-  save() {
-    switch (this.mode) {
+  ngOnDestroy() {
+    this.sub?.unsubscribe();
+  }
+
+  private initForm() {
+    const project = this.projectService.selectedProject.value;
+    this.projectForm = new FormGroup({
+      projeto: new FormControl(project.projeto || null),
+      id_financiador: new FormControl(project.id_financiador || null),
+      id_area_tecnologica: new FormControl(project.id_area_tecnologica || null),
+      coordenador: new FormControl(project.coordenador || null),
+      ativo: new FormControl(project.ativo || false),
+      inicio_vigencia: new FormControl(project.inicio_vigencia || null),
+      fim_vigencia: new FormControl(project.fim_vigencia || null),
+    });
+    this.projectForm.patchValue(project);
+  }
+
+  getHeader() {
+    switch (this.projectService.dialogMode) {
       case 'create':
-        this.api.post('projects', this.project).subscribe((res) => {
-          this.submitCallback(res);
-        });
-        break;
+        return 'Novo Projeto';
       case 'edit':
-        this.api
-          .put(`projects/${this.project.id}`, this.project)
-          .subscribe((res) => {
-            this.submitCallback(res);
-          });
-        break;
+        return 'Editar Projeto';
+      case 'view':
+        return 'Visualizar Projeto';
       default:
-        this.submitCallback('Invalid mode');
+        return 'Projeto';
     }
   }
 
   onSubmit() {
-    console.log(this.projectForm.value);
+    switch (this.projectService.dialogMode) {
+      case 'create':
+        this.projectService.createProject(this.projectForm.value);
+        this.projectService.closeDialog();
+        break;
+      case 'edit':
+        this.projectService.updateProject(this.projectForm.value);
+        this.projectService.closeDialog();
+        break;
+      default:
+        throw new Error('Invalid dialog mode');
+    }
+  }
+
+  onClose() {
+    this.projectService.closeDialog();
   }
 }
