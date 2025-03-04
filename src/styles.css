@@ -1,10 +1,49 @@
 @import "tailwindcss";
 
 :root {
+  --bg-color: #ffffff;
+  --fg-color: #18181b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #18181b;
+    --fg-color: #f1f1f1;
+  }
+}
+
+html {
+  font-size: 16px;
+  font-family: "Lato", "Helvetica", "Roboto", "Arial", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+}
+
+:root {
   --p-tooltip-gutter: 0.5rem;
 }
 
 .p-tooltip {
   padding: 0;
   font-size: small;
+}
+
+.toast-container .ngx-toastr {
+  background-size: 18px !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  color: #ffffff;
+}
+
+.toast-success {
+  background-color: #10b981 !important;
+}
+.toast-error {
+  background-color: #ef4444 !important;
+}
+.toast-info {
+  background-color: #6b7280 !important;
+}
+.toast-warning {
+  background-color: #f59e0b !important;
 }
