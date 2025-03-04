@@ -11,6 +11,7 @@
     <p-floatlabel variant="in">
       <input
         id="name"
+        required
         type="text"
         pInputText
         fluid
@@ -22,6 +23,7 @@
     <p-floatlabel variant="in">
       <p-select
         id="sponsor"
+        required
         [options]="projectService.sponsors"
         [readonly]="projectService.dialogMode === 'view'"
         optionLabel="nome"
@@ -34,6 +36,7 @@
     <p-floatlabel variant="in">
       <p-select
         id="tech_area"
+        required
         [options]="projectService.techAreas"
         [readonly]="projectService.dialogMode === 'view'"
         optionLabel="nome"
@@ -46,6 +49,7 @@
     <p-floatlabel variant="in">
       <input
         id="coordenador"
+        required
         type="text"
         [readOnly]="projectService.dialogMode === 'view'"
         pInputText
@@ -62,6 +66,7 @@
       </label>
       <input
         id="start_date"
+        required
         type="date"
         [readOnly]="projectService.dialogMode === 'view'"
         pInputText
@@ -70,6 +75,7 @@
       />
       <input
         id="end_date"
+        required
         type="date"
         [readOnly]="projectService.dialogMode === 'view'"
         pInputText
@@ -86,6 +92,7 @@
       <div class="flex items-center">
         <p-radiobutton
           inputId="ativoSim"
+          required
           [value]="true"
           [disabled]="projectService.dialogMode === 'view'"
           formControlName="ativo"
@@ -95,6 +102,7 @@
       <div class="flex items-center">
         <p-radiobutton
           inputId="ativoNao"
+          required
           [disabled]="projectService.dialogMode === 'view'"
           [value]="false"
           formControlName="ativo"
