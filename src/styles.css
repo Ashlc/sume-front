@@ -12,15 +12,16 @@
   }
 }
 
-html {
-  font-size: 16px;
-  font-family: "Lato", "Helvetica", "Roboto", "Arial", sans-serif;
-  background-color: var(--bg-color);
-  color: var(--fg-color);
-}
-
 :root {
   --p-tooltip-gutter: 0.5rem;
+  --font-sans: "Lato", "Helvetica", "Roboto", "Arial", sans-serif;
+}
+
+html {
+  font-size: 16px;
+  font-family: var(--font-sans);
+  background-color: var(--bg-color);
+  color: var(--fg-color);
 }
 
 .p-tooltip {
