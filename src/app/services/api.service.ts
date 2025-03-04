@@ -21,6 +21,10 @@ export class ApiService {
     return this.http.put(`${this.baseURL}/${endpoint}/`, data);
   }
 
+  patch(endpoint: string, data: any) {
+    return this.http.patch(`${this.baseURL}/${endpoint}/`, data);
+  }
+
   delete(endpoint: string) {
     return this.http.delete(`${this.baseURL}/${endpoint}/`);
   }
