@@ -112,15 +112,12 @@
     </div>
   </form>
   <ng-template #footer>
-    <p-button (click)="onClose()" severity="secondary">
-      <span class="mb-0.5">CANCELAR</span>
-      <ng-icon name="tablerX" />
+    <p-button (click)="onClose()" severity="secondary" label="Cancelar">
+      <ng-icon name="tablerX" size="1.25rem" />
     </p-button>
     <p-button
       class="flex items-center gap-2"
-      [ariaLabel]="
-        this.projectService.dialogMode === 'view' ? 'Editar' : 'Salvar'
-      "
+      [label]="this.projectService.dialogMode === 'view' ? 'Editar' : 'Salvar'"
       (click)="
         this.projectService.dialogMode === 'view'
           ? projectService.setDialogMode('edit')
@@ -128,10 +125,8 @@
       "
       [disabled]="projectForm.invalid"
     >
-      <span class="mb-0.5 font-bold">
-        {{ this.projectService.dialogMode === "view" ? "EDITAR" : "SALVAR" }}
-      </span>
       <ng-icon
+        size="1.25rem"
         [name]="
           this.projectService.dialogMode === 'view'
             ? 'tablerEdit'
