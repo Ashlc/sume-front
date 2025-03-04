@@ -1,1 +1,7 @@
-{ "plugins": { "@tailwindcss/postcss": {} } }
+{
+  "plugins": {
+    "@tailwindcss/postcss": {},
+    "postcss-import": {},
+    "autoprefixer": {}
+  }
+}
