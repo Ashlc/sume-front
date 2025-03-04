@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { tablerSearch } from '@ng-icons/tabler-icons';
 import { ButtonModule } from 'primeng/button';
 import { FloatLabel } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -16,10 +14,8 @@ import { ProjectService } from '../../services/project.service';
     ButtonModule,
     SelectModule,
     FloatLabel,
-    NgIcon,
   ],
   templateUrl: './project-search.component.html',
-  viewProviders: [provideIcons({ tablerSearch })],
 })
 export class ProjectSearchComponent {
   filterForm: FormGroup = new FormGroup({});
