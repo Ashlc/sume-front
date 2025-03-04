@@ -4,13 +4,14 @@
     <icon-button
       titleAction
       label="Novo projeto"
-      (click)="toggleDialog()"
-      [disabled]="dialogVisible"
+      (click)="projectService.openDialog()"
+      [disabled]="projectService.dialogOpen"
     >
       <ng-icon name="tablerPlus" />
     </icon-button>
   </page-title>
+  <project-search />
   <project-table />
-  <project-dialog [visible]="dialogVisible" [onClose]="closeDialog" />
+  <project-dialog />
 </main>
 <router-outlet />
