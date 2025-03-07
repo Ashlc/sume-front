@@ -1,10 +1,38 @@
-# Prova front-end 
+# Prova front-end
 
 ## Descrição
 
 Este projeto foi desenvolvido para o processo seletivo do Laboratório de Computação Científica e Visualização (LCCV) da Universidade Federal de Alagoas (UFAL), referente à vaga de desenvolvedor front-end, conforme o edital Nº 005/2025.
 
 A aplicação implementa uma interface web interativa seguindo o protótipo fornecido e integra-se com a API disponibilizada para gerenciar projetos via operações CRUD.
+
+## Instalação e execução
+
+Para executar a aplicação, siga os passos abaixo:
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/Ashlc/sume-front.git
+```
+
+2. Acesse o diretório do projeto:
+
+```bash
+cd sume-front
+```
+
+3. Instale as dependências:
+
+```bash
+npm install
+```
+
+4. Execute a aplicação:
+
+```bash
+ng serve
+```
 
 ## Tecnologias utilizadas
 
